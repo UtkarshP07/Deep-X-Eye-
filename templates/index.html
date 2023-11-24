@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepXEye</title>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- normalize css -->
+    <link rel = "stylesheet" href = "static/css/normalize.css">
+    <!-- custom css -->
+    <link rel = "stylesheet" href = "static/css/main.css">
+  
+    <!-- bootstrap css -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+       $(document).ready(function() {
+    // Add a listener to the form submit event
+    $("form").submit(function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Clear previous prediction
+        $(".prediction").html("");
+
+        // Get the form data
+        var formData = new FormData(this);
+
+        // Send an AJAX request
+        $.ajax({
+            type: "POST",
+            url: "/predict",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Update the prediction result on the page
+                $(".prediction").html(response.prediction);
+            }
+        });
+    });
+});
+
+    </script>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Your existing HTML code here -->
+
+    <style>
+        /* Style the image preview section */
+        .image-upload {
+            text-align: center;
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            margin: 20px auto;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Add a listener to the file input change event
+            $("#file").change(function() {
+                // Display image preview
+                var input = this;
+                var imagePreview = $(".image-preview")[0];
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+
+            // Add a listener to the form submit event
+            $("form").submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Clear previous prediction
+                $(".prediction").html("");
+
+                // Get the form data
+                var formData = new FormData(this);
+
+                // Send an AJAX request
+                $.ajax({
+                    type: "POST",
+                    url: "/predict",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Update the prediction result on the page
+                        $(".prediction").html(response.prediction);
+                    }
+                });
+            });
+        });
+    </script>
+   
+    
+</head>
+<body>
+    
+
+    <!-- header -->
+    <header class = "header bg-blue" id="header">
+        <nav class = "navbar bg-blue">
+            <div class = "container flex">
+                <a href = "#header" class = "navbar-brand">
+                    <img src = "static/images/logo.png" alt = "site logo">
+                </a>
+                <button type = "button" class = "navbar-show-btn">
+                    <img src = "static/images/ham-menu-icon.png">
+                </button>
+
+                <div class = "navbar-collapse bg-white">
+                    <button type = "button" class = "navbar-hide-btn">
+                        <img src = "static/images/close-icon.png">
+                    </button>
+                    <ul class = "navbar-nav">
+                        <li class = "nav-item">
+                            <a href = "#header" class = "nav-link">Home</a>
+
+                            <li class = "nav-item">
+                                <a href = "#testing" class = "nav-link">DeepXEye Prediction</a>
+                            </li>
+
+                        </li>
+                        <li class = "nav-item">
+                            <a href = "#about" class = "nav-link">About</a>
+                        </li>
+                        
+                        <li class = "nav-item">
+                            <a href = "#contact" class = "nav-link">Contact</a>
+                        </li>
+                    </ul>
+                    
+                </div> 
+            </div>
+        </nav>
+
+        <div class = "header-inner text-white text-center">
+            <div class = "container grid">
+                <div class = "header-inner-left">
+                    <h1><span>DEEPXEYE</span></h1>
+                    <p class = "lead">Artificial Intelligence Dedicated To Opthmalogy</p>
+                    <p class = "text text-md">"DeepXEye" is an innovative web application designed for the detection of diabetic retinopathy through images. Diabetic retinopathy is a potentially blinding condition that affects people with diabetes.</p>
+                   
+                </div>
+                <div class = "header-inner-right">
+                    <img src = "static/images/head.jpg">
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end of header -->
+
+    <main>
+       
+
+     
+
+        <!-- services section -->
+        <section id = "services" class = "services py">
+            <div class = "container">
+                <div class = "section-head text-center">
+                    <h2 class = "lead"  id="testing">Test Diabetic Retinopathy </h2>
+                    <p class = "text text-lg">Test online our DeepXEye technology for Diabetic Retinopathy disease screening by Artificial Intelligence</p>
+                    <div class = "line-art flex">
+                        <div></div>
+                        <img src = "static/images/4-dots.png">
+                        <div></div>
+                    </div>
+                </div>
+                
+                <div id="test"><video width="1240" height="560"controls autoplay loop>
+                    <source src="static/images/video.mp4" type="video/mp4">
+                </video></div>
+            </div>
+        </section>
+        <!-- end of services section -->
+
+        <!-- banner two section -->
+        <!-- <div class="hero" id="banner-one">
+            <label for="input-file" id="drop-area">
+                <input type="file" accept="image/*" id="input-file" hidden>
+                <div id="img-view">
+                    <img src="images/icon.png" alt="">
+                    <p>Drag and Drop of click here<br> to upload image</p>
+                    <span>Upload any images from desktop</span>
+                </div>
+            </label>
+        </div>
+        <script src="js/upload.js"></script> -->
+<section>
+        <div class="container justify-content-center" style="width:700px" >
+            <!-- <div class="image-upload">
+                <input type="file" name="file" id="file" accept=".jpg, .jpeg, .png" required>
+                <img class="image-preview" src="#" alt="Image Preview">
+            </div> -->
+            <form action = "/predict" method = "POST" enctype="multipart/form-data">
+            <label for="formFileLg" class="form-label">Upload Image</label>
+            <input type="file" name="file" id="file" accept=".jpg, .jpeg, .png" required>
+                <img class="image-preview" src="#" alt="Image Preview">
+            <br>
+            <button class="btn btn-lg btn-dark" type = "submit">Predict</button>
+            </form>
+           
+            <br>
+            
+          </div>
+          <br><br>
+          <div class="prediction">
+            <p class = "textpredi">Prediction: {{ prediction }}</p>
+        </div>  
+        <div class="level"><img src = "static/images/level.png" ></div>      
+         <!-- Your existing HTML code here -->
+
+    <!-- <div class="image-upload">
+        <input type="file" name="file" id="file" accept=".jpg, .jpeg, .png" required>
+        <img class="image-preview" src="#" alt="Image Preview">
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="submit" value="Predict">
+    </form>
+
+    <div class="prediction">
+         The prediction result will be displayed here 
+    </div> -->
+        <script>
+        var myVar;
+        
+        function myFunction() {
+        
+             myVar = setTimeout(showPage, 1000);
+         
+        }
+        
+        function showPage() {
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }
+        </script>
+</section>
+
+
+ <!-- about section -->
+ <section id = "about" class = "about py">
+    <div class = "about-inner">
+        <div class = "container grid">
+            <div class = "about-left text-center">
+                <div class = "section-head">
+                    <h2>About Us</h2>
+                    <div class = "border-line"></div>
+                </div>
+                <p class = "text text-lg">DeepXEye is an exciting website that's using some really smart computer technology to help doctors find and diagnose important eye problems. These issues can be tricky, but DeepXEye is up for the challenge. It's like having a super-smart assistant for doctors. It's like having a digital detective for your eyes, and it's really good at its job, sometimes even better than human doctors.</p>
+                
+            </div>
+            <div class = "about-right flex">
+                <div class = "img">
+                    <img src = "static/images/about.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of about section -->
+        <!-- end of banner two section -->
+
+        <section id = "doc-panel" class = "doc-panel py">
+            <div class = "container">
+                <div class = "section-head">
+                    <h2>Our Doctor Panel</h2>
+                </div>
+
+                <div class = "doc-panel-inner grid">
+                    <div class = "doc-panel-item">
+                        <div class = "img flex">
+                            <img src = "static/images/dr1.webp" alt = "doctor image">
+                            <div class = "info text-center bg-blue text-white flex">
+                                <p class = "lead">Dr. G.V.S.Prasad</p>
+                                <p class = "text-lg">Ophthalmologist</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "doc-panel-item">
+                        <div class = "img flex">
+                            <img src = "static/images/dr2.png" alt = "doctor image">
+                            <div class = "info text-center bg-blue text-white flex">
+                                <p class = "lead">Dr. Deepti Mehta</p>
+                                <p class = "text-lg">Ophthalmologist</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "doc-panel-item">
+                        <div class = "img flex">
+                            <img src = "static/images/dr3.webp" alt = "doctor image">
+                            <div class = "info text-center bg-blue text-white flex">
+                                <p class = "lead">Dr. Pravin Jadhav</p>
+                                <p class = "text-lg">Ophthalmologist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end of doctors section -->
+
+        
+
+        <!-- posts section -->
+        <section id = "posts" class = "posts py">
+            <div class = "container">
+                <div class = "section-head">
+                    <h2>Diabetic Retinopathy</h2>
+                </div>
+                <div class = "posts-inner grid">
+                    <article class = "post-item bg-white">
+                        <div class = "img">
+                            <img src = "static/images/s1.jpg">
+                        </div>
+                        <div class = "content">
+                            <h4>Symtoms</h4>
+                            <p class = "text text-sm"><h5>You might not have symptoms in the early stages of diabetic retinopathy. As the condition progresses, you might develop:</h5></p>
+                            <p class = "text text-sm">Spots or dark strings floating in your vision (floaters)</p>
+                            <p class = "text text-sm">Blurred vision</p>
+                            <p class = "text text-sm">Fluctuating vision</p>
+                            <p class = "text text-sm">Dark or empty areas in your vision</p>
+                            <p class = "text text-sm">Vision loss</p>
+                        </div>
+                    </article>
+
+                    <article class = "post-item bg-white">
+                        <div class = "img">
+                            <img src = "static/images/s2.jpg">
+                        </div>
+                        <div class = "content">
+                            <h4>Risk Factors</h4>
+                            <p class = "text text-sm"><h5>Anyone who has diabetes can develop diabetic retinopathy. The risk of developing the eye condition can increase as a result of:</h5></p>
+                            <p class = "text text-sm">Having diabetes for a long time</p>
+                            <p class = "text text-sm">Poor control of your blood sugar level</p>
+                            <p class = "text text-sm">High blood pressure</p>
+                            <p class = "text text-sm">High cholesterol</p>
+                            <p class = "text text-sm">Pregnancy</p>
+                            <p class = "text text-sm">Tobacco use</p>
+                        </div>
+                    </article>
+
+                    <article class = "post-item bg-white">
+                        <div class = "img">
+                            <img src = "static/images/s3.jpg">
+                        </div>
+                        <div class = "content">
+                            <h4>Prevention</h4>
+                            <p class = "text text-sm"><h5>Preventing diabetic retinopathy is essential, and here are some key points to help prevent or reduce the risk:</h5></p>
+                            <p class = "text text-sm">Control Blood Sugar</p>
+                            <p class = "text text-sm">Regular Exercise</p>
+                            <p class = "text text-sm">Quit Smoking</p>
+                            <p class = "text text-sm">Limit Alcohol</p>
+                            <p class = "text text-sm">Medication Adherence</p>
+                            <p class = "text text-sm">Manage Cholesterol</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <!-- end of posts section -->
+
+        <!-- contact section -->
+        <section id = "contact" class = "contact py">
+            <div class = "container grid">
+                <div class = "contact-left">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2384.6268289831164!2d-6.214682984112116!3d53.29621947996855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486709e0c9c80f8f%3A0x92f408d10f2277c2!2sREVO!5e0!3m2!1sen!2snp!4v1636264848776!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class = "contact-right text-white text-center bg-blue">
+                    <div class = "contact-head">
+                        <h3 class = "lead">Contact Us</h3>
+                        
+                    </div>
+                    <form>
+                        <div class = "form-element">
+                            <input type = "text" class = "form-control" placeholder="Your name">
+                        </div>
+                        <div class = "form-element">
+                            <input type = "email" class = "form-control" placeholder="Your email">
+                        </div>
+                        <div class = "form-element">
+                            <textarea rows = "5" placeholder="Your Message" class = "form-control"></textarea>
+                        </div>
+                        <button type = "submit" class = "btn btn-white btn-submit">
+                            <i class = "fas fa-arrow-right"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- end of contact section -->
+    </main>
+
+    <!-- footer  -->
+    <footer id = "footer" class = "footer text-center">
+        <div class = "container">
+            <div class = "footer-inner text-white py grid">
+                <div class = "footer-item">
+                    <h3 class = "footer-head">about us</h3>
+                    <div class = "icon">
+                        <img src = "static/images/logo.png">
+                    </div>
+                    <p class = "text text-md">DeepXEye is an exciting website that's using some really smart computer technology to help doctors find and diagnose important eye problems. These issues can be tricky, but DeepXEye is up for the challenge.</p>
+                    
+                </div>
+
+                <div class = "footer-item">
+                    <h3 class = "footer-head">tags</h3>
+                    <ul class = "tags-list flex">
+                        <li>medical care</li>
+                        <li>diabetic</li>
+                        <li>retinopathy</li>
+                        <li>surgery</li>
+                        <li>detection</li>
+                        <li>eye</li>
+                    </ul>
+                </div>
+
+                <div class = "footer-item">
+                    <h3 class = "footer-head">Quick Links</h3>
+                    <ul>
+                        <li><a href = "#" class = "text-white">Our Services</a></li>
+                        <li><a href = "#" class = "text-white">Our Plan</a></li>
+                        <li><a href = "#" class = "text-white">Privacy Policy</a></li>
+                        
+                </div>
+
+                
+            </div>
+
+            <div class = "footer-links">
+                <ul class = "flex">
+                    <li><a href = "#" class = "text-white flex"> <i class = "fab fa-facebook-f"></i></a></li>
+                    <li><a href = "#" class = "text-white flex"> <i class = "fab fa-twitter"></i></a></li>
+                    <li><a href = "#" class = "text-white flex"> <i class = "fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <!-- end of footer  -->
+
+
+    <!-- custom js -->
+    <script src = "static/js/script.js"></script>
+</body>
+</html>
